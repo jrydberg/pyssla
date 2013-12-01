@@ -41,6 +41,7 @@ setup(
             'use-isinstance = pyssla.rules.basic:UseIsinstanceRule',
             'never-import-wildcard = pyssla.rules.basic:NeverImportWildcardRule',
             'idiomatic-module-structure = pyssla.rules.basic:IdiomaticModuleStructureRule',
+            'use-in-dict-not-in-dict-keys = pyssla.rules.basic:UseInDictNotInDictKeys',
             ],
         },
     zip_safe=False

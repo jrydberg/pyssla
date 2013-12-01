@@ -54,6 +54,26 @@ class UseIsinstanceRule(Rule):
                 match, "use isinstance() instead of comparing to __class___")
 
 
+class UseInDictNotInDictKeys(Rule):
+    """Use `x in d` rather than `x in d.keys()` for dicts."""
+
+    types = (ast.FunctionDef,)
+    
+    def _init_config(self, config):
+        self.in_keys_pat = pat.parse('_ in _.keys()')
+        self.has_key_pat = pat.parse('_.has_key(_)')
+
+    def analyse(self, node, checker):
+        match = pat.scan(node, self.in_keys_pat)
+        if match:
+            checker.report(
+                match, "use 'k in d' rather than 'k in d.keys()'")
+        match = pat.scan(node, self.has_key_pat)
+        if match:
+            checker.report(
+                match, "use 'k in d' rather than 'd.has_key(k)'")
+
+
 class IdiomaticModuleStructureRule(Rule):
     """Make sure that the module follow a some-what idiomatic structure."""
 
@@ -117,4 +137,3 @@ class IdiomaticModuleStructureRule(Rule):
                 return 'interface function'
         else:
             return 'unknown'
-
