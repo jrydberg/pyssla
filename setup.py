@@ -42,6 +42,7 @@ setup(
             'never-import-wildcard = pyssla.rules.basic:NeverImportWildcardRule',
             'idiomatic-module-structure = pyssla.rules.basic:IdiomaticModuleStructureRule',
             'use-in-dict-not-in-dict-keys = pyssla.rules.basic:UseInDictNotInDictKeys',
+            'short-variable = pyssla.rules.naming:ShortVariableRule',
             ],
         },
     zip_safe=False
