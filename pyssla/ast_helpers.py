@@ -25,14 +25,14 @@ def ast_path(node, path):
         elif token == '*':
             def select(result):
                 for elem in result:
-                    for e in ast.iter_child_nodes(elem):
-                        yield e
+                    for celem in ast.iter_child_nodes(elem):
+                        yield celem
             result = select(result)
         elif token == '':
             def select(result):
                 for elem in result:
-                    for e in ast.walk(elem):
-                        yield e
+                    for celem in ast.walk(elem):
+                        yield celem
             result = select(result)
         else:
             if '[' in token:
@@ -43,16 +43,16 @@ def ast_path(node, path):
 
             def select(result, name):
                 for elem in result:
-                    for e in ast.iter_child_nodes(elem):
-                        if e.__class__.__name__ == name:
-                            yield e
+                    for celem in ast.iter_child_nodes(elem):
+                        if celem.__class__.__name__ == name:
+                            yield celem
             result = select(result, token)
             result = list(result)
             if predicate:
                 def select(result, predicate=predicate):
                     for elem in result:
-                        vars = dict([(f, getattr(elem, f))
-                                     for f in elem._fields])
+                        vars = dict([(field, getattr(elem, field))
+                                     for field in elem._fields])
                         try:
                             val = eval(predicate, globals(), vars)
                         except Exception:

@@ -22,8 +22,8 @@ from .checker import Checker
 
 
 def process(config, filename, exts):
-    with open(filename) as fp:
-        tree = ast.parse(fp.read(), filename)
+    with open(filename) as filep:
+        tree = ast.parse(filep.read(), filename)
 
     checker = Checker(filename)
     for ext in exts:

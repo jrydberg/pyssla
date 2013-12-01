@@ -74,7 +74,7 @@ def _check_fields(node1, node2):
     """
     if node1._fields != node2._fields:
         return False
-    for f in node1._fields:
-        if not (hasattr(node1, f) and hasattr(node2, f)):
+    for field in node1._fields:
+        if not (hasattr(node1, field) and hasattr(node2, field)):
             return False
     return True
