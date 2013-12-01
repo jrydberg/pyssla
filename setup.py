@@ -38,6 +38,9 @@ setup(
             'too-many-fields = pyssla.rules.code_size:TooManyFieldsRule',
             'too-many-methods = pyssla.rules.code_size:TooManyMethods',
             'cyclomatic-complexity = pyssla.rules.complexity:CyclomaticComplexityRule',
+            'use-isinstance = pyssla.rules.basic:UseIsinstanceRule',
+            'never-import-wildcard = pyssla.rules.basic:NeverImportWildcardRule',
+            'idiomatic-module-structure = pyssla.rules.basic:IdiomaticModuleStructureRule',
             ],
         },
     zip_safe=False
