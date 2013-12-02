@@ -38,8 +38,8 @@ class NeverImportWildcardRule(Rule):
 
 class UseIsinstanceRule(Rule):
     """To check whether a function parameter is of a certain type,
-    don't use something like arg.__class__ == MyClass, use
-    isinstance(arg, MyClass).
+    don't use something like `arg.__class__ == MyClass`, use
+    `isinstance(arg, MyClass)`.
     """
 
     types = (ast.FunctionDef,)
@@ -55,7 +55,7 @@ class UseIsinstanceRule(Rule):
 
 
 class UseInDictNotInDictKeys(Rule):
-    """Use `x in d` rather than `x in d.keys()` for dicts."""
+    """Use `k in d` rather than `k in d.keys()` for dicts."""
 
     types = (ast.FunctionDef,)
     

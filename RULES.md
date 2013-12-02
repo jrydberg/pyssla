@@ -73,15 +73,15 @@ threshold | 200
 
 # use-in-dict-not-in-dict-keys #
 
-Use `x in d` rather than `x in d.keys()` for dicts.
+Use `k in d` rather than `k in d.keys()` for dicts.
 
 **Implementation**: `pyssla.rules.basic:UseInDictNotInDictKeys`
 
 # use-isinstance #
 
 To check whether a function parameter is of a certain type,
-don't use something like arg.__class__ == MyClass, use
-isinstance(arg, MyClass).
+don't use something like `arg.__class__ == MyClass`, use
+`isinstance(arg, MyClass)`.
 
 **Implementation**: `pyssla.rules.basic:UseIsinstanceRule`
 
@@ -105,8 +105,8 @@ threshold | 50
 
 Complexity directly affects maintenance costs is determined by
 the number of decision points in a method plus one for the method
-entry.  The decision points include 'if', 'while', 'for', and
-'case labels' calls.
+entry.  The decision points include `if`, `while`, `for`, lambdas,
+`with, `assert`, `try` and bool operations.
 
 Generally, numbers ranging from 1-4 denote low complexity, 5-7
 denote moderate complexity, 8-10 denote high complexity, and 11+
