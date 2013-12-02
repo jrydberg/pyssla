@@ -29,7 +29,9 @@ def process(config, filename, exts):
     for ext in exts:
         rule_conf = getattr(ext.plugin, 'defaults', {})
         rule_conf.update(config.get(ext.name, {}))
-        checker.add_rule(ext.plugin(rule_conf))
+        enabled = rule_conf.get('enabled', True)
+        if enabled:
+            checker.add_rule(ext.plugin(rule_conf))
 
     checker.analyse(tree)
 
