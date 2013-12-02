@@ -106,7 +106,7 @@ threshold | 50
 Complexity directly affects maintenance costs is determined by
 the number of decision points in a method plus one for the method
 entry.  The decision points include `if`, `while`, `for`, lambdas,
-`with, `assert`, `try` and bool operations.
+`with`, `assert`, `try` and bool operations.
 
 Generally, numbers ranging from 1-4 denote low complexity, 5-7
 denote moderate complexity, 8-10 denote high complexity, and 11+
