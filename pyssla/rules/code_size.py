@@ -26,6 +26,10 @@ class ExcessivePublicMethodsRule(Rule):
     but also allows new variations to be developed easily.
     """
     types = (ast.ClassDef,)
+
+    defaults = {
+        'threshold': 20
+        }
     
     def _init_config(self, config):
         self.threshold = config.get('threshold', 20)
@@ -47,6 +51,10 @@ class ExcessiveArgumentListRule(Rule):
     """
 
     types = (ast.FunctionDef,)
+
+    defaults = {
+        'threshold': 10
+        }
     
     def _init_config(self, config):
         self.threshold = config.get('threshold', 10)
@@ -88,6 +96,10 @@ class ExcessiveFunctionLengthRule(_ExcessiveRule):
     """
     types = (ast.FunctionDef,)
 
+    defaults = {
+        'threshold': 50
+        }
+
     def _init_config(self, config):
         self.threshold = config.get('threshold', 50)
 
@@ -105,6 +117,10 @@ class ExcessiveClassLengthRule(_ExcessiveRule):
     methods apart the code becomes more managable and ripe for reuse.
     """
     types = (ast.ClassDef,)
+
+    defaults = {
+        'threshold': 200
+        }
 
     def _init_config(self, config):
         self.threshold = config.get('threshold', 200)
@@ -125,6 +141,11 @@ class TooManyFieldsRule(Rule):
     park them within a single Address field.
     """
     types = (ast.ClassDef,)
+
+    defaults = {
+        'threshold': 15
+        }
+
     path = (
         "./FunctionDef[name=='__init__']"
         "//Assign/Attribute[value.id=='self' and isinstance(ctx, ast.Store)]"
@@ -147,6 +168,10 @@ class TooManyMethods(Rule):
     """
 
     types = (ast.ClassDef,)
+
+    defaults = {
+        'threshold': 10
+        }
 
     def _init_config(self, config):
         self.threshold = config.get('threshold', 10)

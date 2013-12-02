@@ -46,6 +46,10 @@ class CyclomaticComplexityRule(Rule):
     """
     types = (ast.FunctionDef,)
 
+    defaults = {
+        'threshold': 10
+        }
+
     def _init_config(self, config):
         self.threshold = config.get('threshold', 10)
 

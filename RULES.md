@@ -2,6 +2,10 @@
 
 Variables that are very short are not helpful to the reader.
 
+Parameter | Default Value
+--- | ---
+threshold | 3
+
 **Implementation**: `pyssla.rules.naming:ShortVariableRule`
 
 # too-many-methods #
@@ -9,6 +13,10 @@ Variables that are very short are not helpful to the reader.
 A class with too many methods is probably a good suspect for
 refactoring, in order to reduce its complexity and find a way to
 have more fine grained objects.
+
+Parameter | Default Value
+--- | ---
+threshold | 10
 
 **Implementation**: `pyssla.rules.code_size:TooManyMethods`
 
@@ -44,6 +52,10 @@ Methods with numerous parameters are a challenge to
 maintain. These situations usually denote the need for new objects
 to wrap the numerous parameters.
 
+Parameter | Default Value
+--- | ---
+threshold | 10
+
 **Implementation**: `pyssla.rules.code_size:ExcessiveArgumentListRule`
 
 # excessive-class-length #
@@ -52,6 +64,10 @@ Excessive class lengths are usually indications that the class
 may be burdened with excessive responsibilities that could be
 provided by external classes or functions. In breaking these
 methods apart the code becomes more managable and ripe for reuse.
+
+Parameter | Default Value
+--- | ---
+threshold | 200
 
 **Implementation**: `pyssla.rules.code_size:ExcessiveClassLengthRule`
 
@@ -79,6 +95,10 @@ excessive scrolling causes readers to lose focus.
 Try to reduce the method length by creating helper methods and
 removing any copy/pasted code.
 
+Parameter | Default Value
+--- | ---
+threshold | 50
+
 **Implementation**: `pyssla.rules.code_size:ExcessiveFunctionLengthRule`
 
 # cyclomatic-complexity #
@@ -92,6 +112,10 @@ Generally, numbers ranging from 1-4 denote low complexity, 5-7
 denote moderate complexity, 8-10 denote high complexity, and 11+
 is very high complexity.
 
+Parameter | Default Value
+--- | ---
+threshold | 10
+
 **Implementation**: `pyssla.rules.complexity:CyclomaticComplexityRule`
 
 # too-many-fields #
@@ -102,6 +126,10 @@ related fields in new objects.
 
 For example, a class with individual city/state/zip fields could
 park them within a single Address field.
+
+Parameter | Default Value
+--- | ---
+threshold | 15
 
 **Implementation**: `pyssla.rules.code_size:TooManyFieldsRule`
 

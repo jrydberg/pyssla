@@ -23,7 +23,11 @@ class ShortVariableRule(Rule):
     """
 
     types = (ast.FunctionDef,)
-    
+ 
+    defaults = {
+        'threshold': 3
+        }
+   
     def _init_config(self, config):
         self.threshold = config.get('threshold', 3)
 

@@ -27,8 +27,9 @@ def process(config, filename, exts):
 
     checker = Checker(filename)
     for ext in exts:
-        checker.add_rule(ext.plugin(
-            config.get(ext.name, {})))
+        rule_conf = getattr(ext.plugin, 'defaults', {})
+        rule_conf.update(config.get(ext.name, {}))
+        checker.add_rule(ext.plugin(rule_conf))
 
     checker.analyse(tree)
 
