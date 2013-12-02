@@ -13,9 +13,60 @@
 # limitations under the License.
 
 import ast
+import itertools
 
 from ..rule import Rule
-from .. import pat, ast_helpers
+from .. import ast_helpers
+from .. import pat
+
+
+class OneImportPerLineRule(Rule):
+    """Importing just a single name per import statement will make
+    your code easier to read.
+    """
+
+    types = (ast.Import, ast.ImportFrom)
+
+    defaults = {
+        "enabled": False
+        }
+
+    def analyse(self, node, checker):
+        if len(node.names) != 1:
+            checker.report(node, "more than one name imported")
+
+
+class ExcessiveImportedNamesRule(Rule):
+    """If importing many names from a module it is better to import
+    the module itself and refer to attributes in it.
+
+    Example:
+
+        # it is better to import "foo" and refer to .a, .b, and .c.
+        from foo import a
+        from foo import b
+        from foo import c
+
+    """
+    types = (ast.Module,)
+
+    defaults = {
+        'threshold': 3
+        }
+    
+    def _init_config(self, config):
+        self.threshold = config['threshold']
+
+    def analyse(self, node, checker):
+        keyfunc = lambda node: node.module
+        imports = ast_helpers.ast_path(node, './ImportFrom')
+        imports.sort(key=keyfunc)
+        for module, imports in itertools.groupby(imports, keyfunc):
+            num_names = sum([len(child.names) for child in imports])
+            if num_names >= self.threshold:
+                checker.report(
+                    child, "excessive name importing from module '{}'".format(
+                        module))
 
 
 class NeverImportWildcardRule(Rule):

@@ -85,6 +85,35 @@ don't use something like `arg.__class__ == MyClass`, use
 
 **Implementation**: `pyssla.rules.basic:UseIsinstanceRule`
 
+# one-import-per-line #
+
+Importing just a single name per import statement will make
+your code easier to read.
+
+Parameter | Default Value
+--- | ---
+enabled | False
+
+**Implementation**: `pyssla.rules.basic:OneImportPerLineRule`
+
+# excessive-imported-names #
+
+If importing many names from a module it is better to import
+the module itself and refer to attributes in it.
+
+Example:
+
+    # it is better to import "foo" and refer to .a, .b, and .c.
+    from foo import a
+    from foo import b
+    from foo import c
+
+Parameter | Default Value
+--- | ---
+threshold | 3
+
+**Implementation**: `pyssla.rules.basic:ExcessiveImportedNamesRule`
+
 # excessive-function-length #
 
 When methods are excessively long this usually indicates that
