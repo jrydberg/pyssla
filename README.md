@@ -8,7 +8,7 @@ Pyssla will analyse Python code and see if it conforms to a set of
 rules.  There are rules for all kinds of different things ranging from
 naming of local variables to cyclomatic complexity.  
 
-For a complete list of rules, see (RULES.md)[RULES.md].
+For a complete list of rules, see [RULES.md](RULES.md).
 
 # Install
 
