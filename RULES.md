@@ -130,6 +130,20 @@ threshold | 50
 
 **Implementation**: `pyssla.rules.code_size:ExcessiveFunctionLengthRule`
 
+# changing-name-in-closure #
+
+Using variables in a closure that has been defined in a loop
+normally leads to unexpected and buggy behavior
+
+Example:
+
+    for name in ('a', 'b'):
+        def cb():
+            return "wow! {0}".format(name)
+        add_callback(cb)
+
+**Implementation**: `pyssla.rules.bugs:ChangingNameInClosureRule`
+
 # cyclomatic-complexity #
 
 Complexity directly affects maintenance costs is determined by

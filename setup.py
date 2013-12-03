@@ -45,6 +45,7 @@ setup(
             'idiomatic-module-structure = pyssla.rules.basic:IdiomaticModuleStructureRule',
             'use-in-dict-not-in-dict-keys = pyssla.rules.basic:UseInDictNotInDictKeys',
             'short-variable = pyssla.rules.naming:ShortVariableRule',
+            'changing-name-in-closure = pyssla.rules.bugs:ChangingNameInClosureRule',
             ],
         },
     zip_safe=False
