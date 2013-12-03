@@ -15,6 +15,12 @@
 import ast
 
 
+def set_parent(node, parent=None):
+    node.parent = parent
+    for child in ast.iter_child_nodes(node):
+        set_parent(child, node)
+
+
 def ast_path(node, path):
     """."""
     tokens = path.split('/')

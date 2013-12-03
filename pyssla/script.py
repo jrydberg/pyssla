@@ -18,12 +18,19 @@ import sys
 
 from stevedore import extension
 
+from .analyser import ScopeAnalyser
 from .checker import Checker
+from . import ast_helpers
 
 
 def process(config, filename, exts):
     with open(filename) as filep:
         tree = ast.parse(filep.read(), filename)
+
+    ast_helpers.set_parent(tree)
+
+    analyser = ScopeAnalyser()
+    analyser.analyse(tree)
 
     checker = Checker(filename)
     for ext in exts:
