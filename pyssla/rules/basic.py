@@ -18,6 +18,7 @@ import itertools
 from ..rule import Rule
 from .. import ast_helpers
 from .. import pat
+from .. import analyser
 
 
 class OneImportPerLineRule(Rule):
@@ -34,6 +35,56 @@ class OneImportPerLineRule(Rule):
     def analyse(self, node, checker):
         if len(node.names) != 1:
             checker.report(node, "more than one name imported")
+
+
+class UseImportsForPackagesAndModulesOnlyRule(Rule):
+    """Use imports for packages and modules only. This namespace
+    management convention is simple: the source of each identifier is
+    indicated in a consistent way; `x.obj` says that object `obj` is
+    defined in module `x`.
+
+    Use `import x` for importing packages and modules.  Use `from x
+    import y` where *x* is the package prefix and *y* is the module
+    name with no prefix.  Use `from x import y as z` if two modules
+    named *y* are to be imported or if *y* is an inconveniently long
+    name.
+
+    For example the module `sound.effects.echo` may be imported as
+    follows:
+
+        from sound.effects import echo
+        echo.EchoFilter(input, output, delay=0.7, atten=4)
+
+    """
+
+    types = (ast.Module,)
+
+    defaults = {
+        "enabled": False
+        }
+
+    def _binding(self, name):
+        """Find binding for `name`."""
+        node = name
+        while node is not None:
+            if hasattr(node, 'scope'):
+                if name.id in node.scope:
+                    return node.scope[name.id]
+            node = node.parent
+
+    def analyse(self, node, checker):
+        names = ast_helpers.ast_path(
+            node, './/Name[isinstance(ctx, ast.Load)]')
+        # we are only interested in the cases when we're doing
+        # "non-dotted" access:
+        names = [name for name in names
+                 if not isinstance(name.parent, ast.Attribute)]
+        for name in names:
+            binding = self._binding(name)
+            if isinstance(binding, analyser.Importation):
+                checker.report(
+                    name, "import package or module instead of '{}' (name imported at :{})".format(
+                        name.id, binding.source.lineno))
 
 
 class ExcessiveImportedNamesRule(Rule):

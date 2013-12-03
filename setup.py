@@ -40,6 +40,7 @@ setup(
             'cyclomatic-complexity = pyssla.rules.complexity:CyclomaticComplexityRule',
             'use-isinstance = pyssla.rules.basic:UseIsinstanceRule',
             'one-import-per-line = pyssla.rules.basic:OneImportPerLineRule',
+            'use-imports-for-packages-and-modules-only = pyssla.rules.basic:UseImportsForPackagesAndModulesOnlyRule',
             'excessive-imported-names = pyssla.rules.basic:ExcessiveImportedNamesRule',
             'never-import-wildcard = pyssla.rules.basic:NeverImportWildcardRule',
             'idiomatic-module-structure = pyssla.rules.basic:IdiomaticModuleStructureRule',

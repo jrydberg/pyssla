@@ -71,11 +71,30 @@ threshold | 200
 
 **Implementation**: `pyssla.rules.code_size:ExcessiveClassLengthRule`
 
-# use-in-dict-not-in-dict-keys #
+# use-imports-for-packages-and-modules-only #
 
-Use `k in d` rather than `k in d.keys()` for dicts.
+Use imports for packages and modules only. This namespace
+management convention is simple: the source of each identifier is
+indicated in a consistent way; `x.obj` says that object `obj` is
+defined in module `x`.
 
-**Implementation**: `pyssla.rules.basic:UseInDictNotInDictKeys`
+Use `import x` for importing packages and modules.  Use `from x
+import y` where *x* is the package prefix and *y* is the module
+name with no prefix.  Use `from x import y as z` if two modules
+named *y* are to be imported or if *y* is an inconveniently long
+name.
+
+For example the module `sound.effects.echo` may be imported as
+follows:
+
+    from sound.effects import echo
+    echo.EchoFilter(input, output, delay=0.7, atten=4)
+
+Parameter | Default Value
+--- | ---
+enabled | False
+
+**Implementation**: `pyssla.rules.basic:UseImportsForPackagesAndModulesOnlyRule`
 
 # use-isinstance #
 
@@ -175,6 +194,12 @@ Parameter | Default Value
 threshold | 15
 
 **Implementation**: `pyssla.rules.code_size:TooManyFieldsRule`
+
+# use-in-dict-not-in-dict-keys #
+
+Use `k in d` rather than `k in d.keys()` for dicts.
+
+**Implementation**: `pyssla.rules.basic:UseInDictNotInDictKeys`
 
 # idiomatic-module-structure #
 
